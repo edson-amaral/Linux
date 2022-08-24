@@ -1,0 +1,45 @@
+Criar usuários
+
+useradd -> Cria/adiciona um usuario ao sistema:
+Ex.: useradd <opcoes> [nome_usuario]
+
+
+
+Le as linhas de um arquivo users.txt e cria os usuario. Apos emite a saida de sucesso
+
+USANDO O WHILE
+while read line; do useradd $line; echo -e "Usuario $line criado com sucesso"; done < users.txt
+
+USANDO O FOR
+for line in $(cat users.txt); do useradd $line; echo oUsuario $line criando com sucesso; done
+
+
+Le as linha de um arquivo users.txt e imprime as linhas
+for line in $(cat users.txt); do echo "$line"; done
+
+
+GROUPS
+groups [usuário]
+
+Descrição
+Este comando exibe os nomes dos grupos aos quais um usuário pertence.
+
+Opções do comando
+--help : lista as opções disponíveis com o comando.
+--version : exibe informações sobre o aplicativo.
+Exemplo
+O comando
+
+groups aluno
+
+informa os grupos ao quais o usuário aluno faz parte.
+
+Observações
+A lista dos grupos existentes no sistema é armazenada em /etc/group.
+O uso do comando groups sem parâmetros faz com que o sistema informe os grupos do usuário que digitou o comando.
+O primeiro grupo mostrado na lista deste comando corresponde ao grupo que está sendo utilizado na sessão pelo usuário.
+Os comandos groupadd e addgroup criam um novo grupo de usuários.
+Os comandos groupdel e delgroup deletam um grupo de usuários.
+O comando groupmod modifica um grupo de usuários.
+O comando chgrp altera o nome de grupo de arquivos.
+O comando newgrp muda, temporariamente, o grupo (GID) do usuário.i
