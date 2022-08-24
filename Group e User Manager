@@ -3,8 +3,6 @@ Criar usuários
 useradd -> Cria/adiciona um usuario ao sistema:
 Ex.: useradd <opcoes> [nome_usuario]
 
-
-
 Le as linhas de um arquivo users.txt e cria os usuario. Apos emite a saida de sucesso
 
 USANDO O WHILE
@@ -13,10 +11,8 @@ while read line; do useradd $line; echo -e "Usuario $line criado com sucesso"; d
 USANDO O FOR
 for line in $(cat users.txt); do useradd $line; echo oUsuario $line criando com sucesso; done
 
-
 Le as linha de um arquivo users.txt e imprime as linhas
 for line in $(cat users.txt); do echo "$line"; done
-
 
 GROUPS
 groups [usuário]
