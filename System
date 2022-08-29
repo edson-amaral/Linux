@@ -1,0 +1,163 @@
+who
+Informações do sistema
+Comando “uname”
+• uname ? Exibe informações sobre o sistema instalado, incluindo a versão do Kernel:
+• Ex.: uname -a
+• O parâmetro “-a” (all) exibe todas as informações disponíveis.
+• Entretanto, o “uname” não exibe qual distribuição e sua versão (na maioria dos casos). Para 
+identificar a distribuição, por padrão há um arquivo dentro de “/etc”.
+
+Informações do sistema
+Comando “uptime”
+• uptime ? Exibe um resumo de informações sobre o sistema como:
+• Hora atual;
+• Tempo que o sistema está em execução (“up”, “no ar”);
+• Quantidade de usuários logados;
+ “Load Average”, que mostra quantos processos em média estão aguardando (na fila) para serem 
+executados, sendo que as separações por “vírgula” epresentam os intervalos de tempo de 1, 5 e 15 
+minutos.
+
+Informações de memória
+Comando “free”
+• free ? Exibe informações sobre a utilização da memória RAM e SWAP.
+• Ex.: free -m
+• O parâmetro “-m” exibe a utilização em MB, da mesma forma que “-g” ou “-k” podem ser utilizados para 
+exibição em GB e KB respectivamente.
+
+Informações sobre discos
+Comandos “df” e “du”
+• df ? Exibe informações sobre o espaço livre/utilizado em disco:
+• Ex.: df -h
+• O parâmetro “-h” exibe de forma “inteligível” (humam readable).
+
+du ? Exibe o tamanho ocupado em disco de arquivos ou diretórios:
+• Ex.: du -hs /etc
+• O parâmetro “-s” exibe o tamanho total ocupado pelo diretório “/etc”;
+• O parâmetro “-h” exibe de forma “inteligível” (humam readable).
+
+Informações sobre arquivos
+Comando “file”
+• file ? Exibe o tipo de um determinado arquivo (se o mesmo é texto, imagem,
+arquivo compactado, entre outros).
+• Ex.: file <nome_do_arquivo>
+
+Informações do sistema
+Acessos (Logons)
+• w 
+ Exibe a saída do comando “uptime” e informações sobre os usuários conectados, como tempo ocioso e 
+processo que este usuário está executando.
+• Ex.:• who 
+ Exibe quais usuários estão logados no sistema, qual o “terminal” este usuário está conectado, data e 
+hora do Logon, e por fim, o IP de origem desta conexão (caso seja uma conexão remota).
+• Ex.:• whoami 
+ Exibe qual o nome do usuário logado no terminal atual:
+
+Configurações de rede
+Conceitos
+• No GNU/Linux, as configurações de rede podem ser realizadas de 3 formas:
+• Configurar IP estático/fixo, nos arquivos de configurações de rede.
+• Esta opção é mais comum em Servidores, em que o IP fixo é fundamental para o pleno
+funcionamento.
+• Definir um IP manualmente, que permanecerá até o próximo reboot.
+• Esta opção é muito usada para realizar testes e/ou manutenções no ambiente (por ser temporário).
+• Solicitar um IP através do cliente DHCP (caso tenha um servidor DHCP na rede).
+• Geralmente a mais utilizada em Desktops (assim como em sistemas Windows), devido a flexibilidade e
+mobilidade.
+• Para solicitar um IP via DHCP, temos os comandos “ifdown” + ”ifup” ou o “dhclient”:
+• Ex.: ifdown <interface> (para desabilitar) + ifup <interface> (para habilitar).
+• Ex.: dhclient ou dhclient <interface>
+• Para identificar as suas interfaces de rede, execute “ifconfig” ou “ip addr” conforme slides a 
+seguir.
+
+
+Informações de rede
+Comando “ifconfig”
+• ifconfig ? Permite verificar o IP atual ou configurar um IP para um determinado
+adaptador de rede:
+• Ex.: ifconfig <interface>
+• O comando acima apenas verifica o IP de uma determinada interface;
+• Ex.: ifconfig <interface> [X.X.X.X] netmask [Y.Y.Y.Y]
+• O comando acima atribui um IP a uma determinada interface;
+
+
+Informações de rede
+Comando “route”
+• route ? Permite visualizar ou modificar rotas ou o “Default Gateway”:
+• Ex.: route add default gw [X.X.X.X]
+• Define o “Default Gateway”;
+• Ex.: route -n
+• Apenas exibe as rotas existentes;
+• OBS.: As configurações realizadas através dos comandos “ifconfig” e “route” são voláteis, ou
+seja, serão aplicados até o computador ser reiniciado.
+
+Informações de rede
+Comando “ip address”
+
+A principal utilidade do comando é definir um endereço IP. Segue exemplo:
+• Listando as interfaces. Ex.: ip address ou ip addr list ou ip addr
+• Definindo endereço IP na interface “enp0s3”. Ex.: ip address add x.x.x.x/mask dev <interface>
+• Listando somente a interface “enp0s3” e seu IP. Ex.: ip address list enp0s3 ou ip addr list enp0s3
+
+Definindo endereço IP na interface “enp0s3”. Ex.: ip address add x.x.x.x/mask dev <interface>
+• Listando somente a interface “enp0s3” e seu IP. Ex.: ip address list enp0s3 ou ip addr list enp0s3
+
+Informações de rede
+Comando “ip address”
+
+A remoção de um endereço IP possui sintaxe similar, tendo duas possibilidades:
+• Remover todos os endereços de uma interface (caso tenha mais de um IP):
+• Ex.: ip address flush dev enp0s3
+• Remover apenas um endereço da interface “enp0s3”:
+• Ex.: ip address del x.x.x.x/mask dev <interface>
+
+Informações sobre Hardware
+Comando “dmesg”
+• dmesg ? exibe todo o Hardware reconhecido/carregado pelo kernel durante a inicialização
+Comando muito útil, pois possibilita uma análise passo a passo da identificação do Hardware durante a 
+inicialização do kernel, auxiliando a resolução de problemas (troubleshooting).
+• Nas distribuições antigas, as mensagens eram armazenadas no arquivo “/var/log/dmesg”.
+
+Informações sobre Hardware
+Listando dispositivos
+• lspci ? exibe informações do chipset e dispositivos PCI:
+• Ex.: lspci
+
+lsusb 
+ exibe informações sobre dispositivos USB conectados:
+• Ex.: lsusb
+
+Informações sobre Hardware
+Módulos/Drivers
+• Para instalar/desinstalar dispositivos que o sistema não reconheça
+automaticamente, devemos realizar o download do módulo (driver) do dispositivo a
+ser instalado e utilizar os comandos abaixo:
+• lsmod ? exibe os módulos (drivers) carregados no sistema:
+• Ex.: lsmod
+• insmod ? Instala/carrega um novo módulo no Kernel.
+• Ex.: insmod [arquivo] <opções>
+• rmmod ? Remove um módulo (devemos ter cautela na realização do mesmo,
+tendo em vista que ao remover um módulo, “desativamos” o hardware associado ao
+módulo);
+• Ex.: rmmod <nome_do_modulo>
+
+Informações sobre Hardware
+Diretório “/proc”
+• O diretório “/proc” é um diretório virtual do sistema Linux com algumas características importantes:
+• É um diretório utilizado exclusivamente pelo kernel para gerenciamento do sistema e seus recursos;
+• Existe apenas enquanto o computador está ligado;
+• Possui diversos arquivos com o tamanho de 0 bytes, porém, podemos encontrar conteúdos nestes 
+arquivos;
+• O maior arquivo deste diretório se chama “kcore”, que possui tamanho próximo ao disponível na memória 
+RAM;
+• Não podemos gravar ou criar arquivos neste diretório.
+Diretório “/proc”
+• Através do diretório “/proc”, podemos:
+• Obter informações do processador ? Ex.: cat /proc/cpuinfo
+Através do diretório “/proc”, podemos:
+• Listar os dispositivos IDE conectados ? Ex.: ls -l /proc/ide
+Informações sobre dispositivos SCSI, SATA ou SAS ? Ex.: cat /proc/scsi/scsi
+Armazenamento
+• Além das opções descritas no slide anterior, temos um comando específico para
+listar todos os dispositivos de armazenamento conectados em nosso computador
+(veremos mais detalhes sobre este comando no slide sobre particionamento):
+• Ex.: fdisk -l
